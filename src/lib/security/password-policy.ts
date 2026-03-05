@@ -8,12 +8,22 @@ export const PASSWORD_POLICY = {
   lockoutMinutes: 15
 };
 
+export type PasswordCheck = {
+  key: 'minLength' | 'upper' | 'lower' | 'number' | 'symbol';
+  label: string;
+  valid: boolean;
+};
+
+export const getPasswordChecks = (password: string): PasswordCheck[] => [
+  { key: 'minLength', label: `At least ${PASSWORD_POLICY.minLength} characters`, valid: password.length >= PASSWORD_POLICY.minLength },
+  { key: 'upper', label: 'Contains uppercase letter', valid: /[A-Z]/.test(password) },
+  { key: 'lower', label: 'Contains lowercase letter', valid: /[a-z]/.test(password) },
+  { key: 'number', label: 'Contains number', valid: /[0-9]/.test(password) },
+  { key: 'symbol', label: 'Contains symbol', valid: /[^A-Za-z0-9]/.test(password) }
+];
+
 export const validatePassword = (password: string) => {
-  const errors: string[] = [];
-  if (password.length < PASSWORD_POLICY.minLength) errors.push('Password too short');
-  if (PASSWORD_POLICY.requireUpper && !/[A-Z]/.test(password)) errors.push('Need uppercase');
-  if (PASSWORD_POLICY.requireLower && !/[a-z]/.test(password)) errors.push('Need lowercase');
-  if (PASSWORD_POLICY.requireNumber && !/[0-9]/.test(password)) errors.push('Need number');
-  if (PASSWORD_POLICY.requireSymbol && !/[^A-Za-z0-9]/.test(password)) errors.push('Need symbol');
+  const checks = getPasswordChecks(password);
+  const errors = checks.filter((c) => !c.valid).map((c) => c.label);
   return { valid: errors.length === 0, errors };
 };

@@ -1,8 +1,14 @@
-# env reference
+# Environment Reference
 
-This document explains enterprise patterns for **env-reference** in this boilerplate.
+## Required
+- `DATABASE_URL`: PostgreSQL connection string.
 
-- Purpose
-- Key implementation files
-- Extension checklist
-- Security and testing considerations
+## Recommended
+- `NODE_ENV`: `development`, `test`, or `production`.
+- `NEXT_PUBLIC_APP_NAME`: UI app label.
+- `NEXT_PUBLIC_SUPPORT_EMAIL`: support contact in UI.
+
+## Security Notes
+- Never commit real `.env` values.
+- Rotate secrets on team changes.
+- Keep production credentials in a secret manager.

@@ -1,8 +1,19 @@
-# master crud
+# Master CRUD
 
-This document explains enterprise patterns for **master-crud** in this boilerplate.
+## Purpose
+Master tables store low-churn reference data that powers business workflows (e.g., departments, designations).
 
-- Purpose
-- Key implementation files
-- Extension checklist
-- Security and testing considerations
+## Current Masters
+- Departments (`/masters/departments`)
+- Designations (`/masters/designations`)
+
+## CRUD Standards
+- Validate payloads strictly.
+- Enforce unique code constraints.
+- Track create/update actor in audit logs.
+- Expose paginated APIs for larger datasets.
+
+## UI Standards
+- Table list with filters and pagination.
+- Inline status/validation feedback.
+- Bulk upload/download optional for operations teams.
