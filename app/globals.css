@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 0 0% 100%;
+  --fg: 222 47% 11%;
+  --primary: 221 83% 53%;
+  --muted: 210 40% 96%;
+  --border: 214 32% 91%;
+  --danger: 0 72% 51%;
+}
+.dark {
+  --bg: 222 47% 11%;
+  --fg: 210 40% 96%;
+  --primary: 217 91% 60%;
+  --muted: 217 33% 17%;
+  --border: 217 33% 22%;
+  --danger: 0 63% 31%;
+}
+body { @apply bg-bg text-fg; }
